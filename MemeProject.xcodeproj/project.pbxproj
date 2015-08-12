@@ -13,6 +13,7 @@
 		AD34CC081B7A6800008E53E1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD34CC071B7A6800008E53E1 /* Images.xcassets */; };
 		AD34CC0B1B7A6800008E53E1 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD34CC091B7A6800008E53E1 /* LaunchScreen.xib */; };
 		AD34CC171B7A6800008E53E1 /* MemeProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD34CC161B7A6800008E53E1 /* MemeProjectTests.swift */; };
+		AD6A8D051B7BE30A005628FF /* Meme.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6A8D041B7BE30A005628FF /* Meme.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		AD34CC101B7A6800008E53E1 /* MemeProjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MemeProjectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD34CC151B7A6800008E53E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AD34CC161B7A6800008E53E1 /* MemeProjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeProjectTests.swift; sourceTree = "<group>"; };
+		AD6A8D041B7BE30A005628FF /* Meme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Meme.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,9 +79,10 @@
 		AD34CBFD1B7A6800008E53E1 /* MemeProject */ = {
 			isa = PBXGroup;
 			children = (
-				AD34CC001B7A6800008E53E1 /* AppDelegate.swift */,
-				AD34CC021B7A6800008E53E1 /* ViewController.swift */,
 				AD34CC041B7A6800008E53E1 /* Main.storyboard */,
+				AD34CC021B7A6800008E53E1 /* ViewController.swift */,
+				AD6A8D041B7BE30A005628FF /* Meme.swift */,
+				AD34CC001B7A6800008E53E1 /* AppDelegate.swift */,
 				AD34CC071B7A6800008E53E1 /* Images.xcassets */,
 				AD34CC091B7A6800008E53E1 /* LaunchScreen.xib */,
 				AD34CBFE1B7A6800008E53E1 /* Supporting Files */,
@@ -212,6 +215,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD6A8D051B7BE30A005628FF /* Meme.swift in Sources */,
 				AD34CC031B7A6800008E53E1 /* ViewController.swift in Sources */,
 				AD34CC011B7A6800008E53E1 /* AppDelegate.swift in Sources */,
 			);
@@ -409,6 +413,7 @@
 				AD34CC1C1B7A6800008E53E1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		AD34CC1D1B7A6800008E53E1 /* Build configuration list for PBXNativeTarget "MemeProjectTests" */ = {
 			isa = XCConfigurationList;
@@ -417,6 +422,7 @@
 				AD34CC1F1B7A6800008E53E1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
