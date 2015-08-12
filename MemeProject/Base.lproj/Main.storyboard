@@ -20,21 +20,6 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FbQ-mT-RSF">
                                 <rect key="frame" x="180" y="236" width="240" height="128"/>
                             </imageView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Fb-xl-bfE" userLabel="bottomToolBar">
-                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
-                                <items>
-                                    <barButtonItem title="Album" id="KIy-QY-VH2">
-                                        <connections>
-                                            <action selector="pickAnImage:" destination="vXZ-lx-hvc" id="rX2-4u-lFt"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem systemItem="camera" id="ueD-uL-Y4s">
-                                        <connections>
-                                            <action selector="takeCameraImage:" destination="vXZ-lx-hvc" id="J8V-2N-deM"/>
-                                        </connections>
-                                    </barButtonItem>
-                                </items>
-                            </toolbar>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hf6-5u-6F0" userLabel="topToolBar">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                 <items>
@@ -43,6 +28,7 @@
                                             <action selector="shareMeme:" destination="vXZ-lx-hvc" id="kI7-pQ-Qya"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Yti-f8-s9b"/>
                                     <barButtonItem title="Cancel" id="1mn-jl-eEQ">
                                         <connections>
                                             <action selector="cancel:" destination="vXZ-lx-hvc" id="mTE-CR-mXl"/>
@@ -60,6 +46,23 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Fb-xl-bfE" userLabel="bottomToolBar">
+                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="WFh-i0-kf6"/>
+                                    <barButtonItem systemItem="camera" id="ueD-uL-Y4s">
+                                        <connections>
+                                            <action selector="takeCameraImage:" destination="vXZ-lx-hvc" id="J8V-2N-deM"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="Album" id="KIy-QY-VH2">
+                                        <connections>
+                                            <action selector="pickAnImage:" destination="vXZ-lx-hvc" id="rX2-4u-lFt"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="VbD-kM-nwq"/>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
