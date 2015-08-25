@@ -12,7 +12,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UITextF
 
     @IBOutlet weak var topToolbar: UIToolbar!
     @IBOutlet weak var shareButton: UIBarButtonItem!
-    @IBOutlet weak var cancelButton: UIBarButtonItem!
     
     @IBOutlet weak var topText: UITextField!
     @IBOutlet weak var imageView: UIImageView!
@@ -29,7 +28,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UITextF
         self.topText.delegate = self
         
         self.shareButton.enabled = false
-        self.cancelButton.enabled = false
         
         let memeTextAttributes = [
             NSStrokeColorAttributeName : UIColor.blackColor(),
@@ -55,7 +53,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UITextF
         // If image has been selected, enable top toolbar buttons
         if let image = self.imageView.image {
             self.shareButton.enabled = true
-            self.cancelButton.enabled = true
         }
     }
     
@@ -96,16 +93,21 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UITextF
         
         shareMemeViewController.completionWithItemsHandler = {
             (success) in
+            
+            // Create the meme
             var meme = Meme(top: self.topText.text!, bottom: self.bottomText.text!, originalImage: self.imageView.image!, memedImage: memedImage)
+            
+            // Add it to the memes array in the Application delegate
+            let object = UIApplication.sharedApplication().delegate
+            let appDelegate = object as! AppDelegate
+            appDelegate.memes.append(meme)
+            
             self.dismissViewControllerAnimated(true, completion: nil)
         }
     }
     
     @IBAction func cancel(sender: AnyObject) {
-        self.imageView.image = nil
-        self.topText.text = "TOP"
-        self.bottomText.text = "BOTTOM"
-        
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     // Show selected image once viewer has picked an album image or taken a photo
