@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate, UITextFieldDelegate, UINavigationControllerDelegate {
+class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate, UITextFieldDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var topToolbar: UIToolbar!
     @IBOutlet weak var shareButton: UIBarButtonItem!
@@ -20,6 +20,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UITextF
     @IBOutlet weak var albumButton: UIBarButtonItem!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var bottomToolbar: UIToolbar!
+    
+    var editTopText: String?
+    var editBottomText: String?
+    var editImage: UIImage?
+    var editedImageIndex: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,6 +57,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UITextF
         
         // If image has been selected, enable top toolbar buttons
         if let image = self.imageView.image {
+            self.shareButton.enabled = true
+        }
+        
+        // If editing a previous meme, populate text fields with info
+        if let editTopText = self.editTopText {
+            self.topText.text = editTopText
+            self.bottomText.text = editBottomText
+            self.imageView.image = editImage
             self.shareButton.enabled = true
         }
     }
@@ -100,9 +113,19 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UITextF
             // Add it to the memes array in the Application delegate
             let object = UIApplication.sharedApplication().delegate
             let appDelegate = object as! AppDelegate
-            appDelegate.memes.append(meme)
             
-            self.dismissViewControllerAnimated(true, completion: nil)
+            
+            //Add to meme array or replace if editing meme
+            if let editedImageIndex = self.editedImageIndex {
+                appDelegate.memes.removeAtIndex(editedImageIndex)
+                appDelegate.memes.insert(meme, atIndex: editedImageIndex)
+                self.presentingViewController!.dismissViewControllerAnimated(true, completion: nil)
+            } else {
+                appDelegate.memes.append(meme)
+                self.dismissViewControllerAnimated(true, completion: nil)
+            }
+            
+            
         }
     }
     
