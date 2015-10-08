@@ -36,8 +36,18 @@ class MemeTableViewController: UIViewController, UITableViewDataSource, UITableV
         
         cell.title.text = meme.top! + " ... " + meme.bottom!
         cell.memeImage.image = meme.originalImage
-        cell.topMemeText.text = meme.top
-        cell.bottomMemeText.text = meme.bottom
+        
+        //Style Text
+        let textAttributes = [
+            NSStrokeColorAttributeName : UIColor.blackColor(),
+            NSForegroundColorAttributeName : UIColor.whiteColor(),
+            NSFontAttributeName : UIFont(name: "HelveticaNeue-CondensedBlack", size: 15)!,
+            NSStrokeWidthAttributeName : -3
+        ]
+        let attribTopText = NSAttributedString(string: meme.top!, attributes: textAttributes)
+        let attribBottomText = NSAttributedString(string: meme.bottom!, attributes: textAttributes)
+        cell.topMemeText.attributedText = attribTopText
+        cell.bottomMemeText.attributedText = attribBottomText
                 
         return cell
     }

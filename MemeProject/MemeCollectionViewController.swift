@@ -19,16 +19,12 @@ class MemeCollectionViewController: UICollectionViewController, UICollectionView
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //let space: CGFloat = 1.0
+        let space: CGFloat = 0.1
         
-        let dimension = (self.view.frame.size.width) / 4.0
+        let dimension = (self.view.frame.size.width - (4 * space))  / 4.0
         
-        println(self.view.frame.size.width)
-        println(self.view.frame.size.height)
-        println(dimension)
-        
-        //flowLayout.minimumInteritemSpacing = space
-        //flowLayout.minimumLineSpacing = space
+        flowLayout.minimumInteritemSpacing = space
+        flowLayout.minimumLineSpacing = space
         flowLayout.itemSize = CGSizeMake(dimension, dimension)
                 
     }
@@ -52,6 +48,18 @@ class MemeCollectionViewController: UICollectionViewController, UICollectionView
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("MemeCollectionViewCell", forIndexPath: indexPath) as! MemeCollectionViewCell
         let meme = memes[indexPath.row]
         cell.memeImageView.image = meme.memedImage
+        
+        //Style Text
+        let textAttributes = [
+            NSStrokeColorAttributeName : UIColor.blackColor(),
+            NSForegroundColorAttributeName : UIColor.whiteColor(),
+            NSFontAttributeName : UIFont(name: "HelveticaNeue-CondensedBlack", size: 15)!,
+            NSStrokeWidthAttributeName : -3
+        ]
+        let attribTopText = NSAttributedString(string: meme.top!, attributes: textAttributes)
+        let attribBottomText = NSAttributedString(string: meme.bottom!, attributes: textAttributes)
+        cell.topText.attributedText = attribTopText
+        cell.bottomText.attributedText = attribBottomText
         
         return cell
 
