@@ -29,10 +29,10 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.bottomText.delegate = self
-        self.topText.delegate = self
+        bottomText.delegate = self
+        topText.delegate = self
         
-        self.shareButton.enabled = false
+        shareButton.enabled = false
         
         let memeTextAttributes = [
             NSStrokeColorAttributeName : UIColor.blackColor(),
@@ -40,12 +40,12 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
             NSFontAttributeName : UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
             NSStrokeWidthAttributeName : -3
         ]
-        self.topText.defaultTextAttributes = memeTextAttributes
-        self.bottomText.defaultTextAttributes = memeTextAttributes
-        self.topText.text = "TOP"
-        self.bottomText.text = "BOTTOM"
-        self.topText.textAlignment = NSTextAlignment.Center
-        self.bottomText.textAlignment = NSTextAlignment.Center
+        topText.defaultTextAttributes = memeTextAttributes
+        bottomText.defaultTextAttributes = memeTextAttributes
+        topText.text = "TOP"
+        bottomText.text = "BOTTOM"
+        topText.textAlignment = NSTextAlignment.Center
+        bottomText.textAlignment = NSTextAlignment.Center
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -53,25 +53,25 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         // Enable camera button only if camera is available
         cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
         
-        self.subscribeToKeyboardNotifications()
+        subscribeToKeyboardNotifications()
         
         // If image has been selected, enable top toolbar buttons
-        if let image = self.imageView.image {
-            self.shareButton.enabled = true
+        if let image = imageView.image {
+            shareButton.enabled = true
         }
         
         // If editing a previous meme, populate text fields with info
-        if let editTopText = self.editTopText {
-            self.topText.text = editTopText
-            self.bottomText.text = editBottomText
-            self.imageView.image = editImage
-            self.shareButton.enabled = true
+        if let editTopText = editTopText {
+            topText.text = editTopText
+            bottomText.text = editBottomText
+            imageView.image = editImage
+            shareButton.enabled = true
         }
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        self.unsubscribeFromKeyboardNotifications()
+        unsubscribeFromKeyboardNotifications()
     }
     
     override func prefersStatusBarHidden() -> Bool {
@@ -84,25 +84,25 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         let pickerController = UIImagePickerController()
         pickerController.delegate = self
         pickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-        self.presentViewController(pickerController, animated: true, completion: nil)
+        presentViewController(pickerController, animated: true, completion: nil)
     }
     
     @IBAction func takeCameraImage(sender: AnyObject) {
         let cameraController = UIImagePickerController()
         cameraController.delegate = self
         cameraController.sourceType = UIImagePickerControllerSourceType.Camera
-        self.presentViewController(cameraController, animated: true, completion: nil)
+        presentViewController(cameraController, animated: true, completion: nil)
     }
     
     // Show Activity View Controller when Share Button is clicked
     @IBAction func shareMeme(sender: UIBarButtonItem) {
         var memedImage = generateMemedImage()
-        var meme = Meme(top: topText.text!, bottom: bottomText.text!, originalImage: self.imageView.image!, memedImage: memedImage)
+        var meme = Meme(top: topText.text!, bottom: bottomText.text!, originalImage: imageView.image!, memedImage: memedImage)
         
         //TODO: define an instance of the ActivityViewController
         let shareMemeViewController = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
         
-        self.presentViewController(shareMemeViewController, animated: true, completion: nil)
+        presentViewController(shareMemeViewController, animated: true, completion: nil)
         
         shareMemeViewController.completionWithItemsHandler = {
             (success) in
@@ -130,32 +130,32 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     }
     
     @IBAction func cancel(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
     // Show selected image once viewer has picked an album image or taken a photo
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            self.imageView.image = image
-            self.dismissViewControllerAnimated(true, completion: nil)
+            imageView.image = image
+            dismissViewControllerAnimated(true, completion: nil)
         }
     }
     
     func generateMemedImage() -> UIImage
     {
         // Hide Toolbars
-        self.topToolbar.hidden = true
-        self.bottomToolbar.hidden = true
+        topToolbar.hidden = true
+        bottomToolbar.hidden = true
         
         // Render view to an image
-        UIGraphicsBeginImageContext(self.view.frame.size)
-        self.view.drawViewHierarchyInRect(self.view.frame, afterScreenUpdates: true)
+        UIGraphicsBeginImageContext(view.frame.size)
+        view.drawViewHierarchyInRect(view.frame, afterScreenUpdates: true)
         let memedImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
         // Hide Toolbars
-        self.topToolbar.hidden = false
-        self.bottomToolbar.hidden = false
+        topToolbar.hidden = false
+        bottomToolbar.hidden = false
         
         return memedImage
     }
@@ -177,14 +177,14 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     
     //Move view up or down based on keyboard interaction
     func keyboardWillShow(notification: NSNotification) {
-        if self.bottomText.editing {
-            self.view.frame.origin.y -= getKeyboardHeight(notification)
+        if bottomText.editing {
+            view.frame.origin.y -= getKeyboardHeight(notification)
         }
     }
     
     func keyboardWillHide(notification: NSNotification) {
-        if self.bottomText.editing {
-            self.view.frame.origin.y += getKeyboardHeight(notification)
+        if bottomText.editing {
+            view.frame.origin.y += getKeyboardHeight(notification)
         }
     }
     

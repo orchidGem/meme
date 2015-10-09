@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class Meme {
+struct Meme {
     var top: String?
     var bottom: String?
     var originalImage: UIImage

@@ -22,17 +22,17 @@ class MemeTableViewController: UIViewController, UITableViewDataSource, UITableV
         tableView.delegate = self
         tableView.dataSource = self
         
-        self.tableView.reloadData() // Reset table data
+        tableView.reloadData() // Reset table data
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.memes.count
+        return memes.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
        
         let cell = tableView.dequeueReusableCellWithIdentifier("MemeCell") as! MemeTableViewCell
-        let meme = self.memes[indexPath.row]
+        let meme = memes[indexPath.row]
         
         cell.title.text = meme.top! + " ... " + meme.bottom!
         cell.memeImage.image = meme.originalImage
@@ -54,15 +54,15 @@ class MemeTableViewController: UIViewController, UITableViewDataSource, UITableV
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 
-        let memeDetailView = self.storyboard!.instantiateViewControllerWithIdentifier("MemeDetailViewController") as! MemeDetailViewController
-        memeDetailView.meme = self.memes[indexPath.row]
+        let memeDetailView = storyboard!.instantiateViewControllerWithIdentifier("MemeDetailViewController") as! MemeDetailViewController
+        memeDetailView.meme = memes[indexPath.row]
         memeDetailView.memeIndex = indexPath.row
-        self.navigationController!.pushViewController(memeDetailView, animated: true)
+        navigationController!.pushViewController(memeDetailView, animated: true)
     }
     
     @IBAction func addMeme(sender: AnyObject) {
-        let addMemeViewController = self.storyboard?.instantiateViewControllerWithIdentifier("EditMeme") as! EditMemeViewController
-        self.presentViewController(addMemeViewController, animated: true, completion: nil)
+        let addMemeViewController = storyboard?.instantiateViewControllerWithIdentifier("EditMeme") as! EditMemeViewController
+        presentViewController(addMemeViewController, animated: true, completion: nil)
     }
     
 }

@@ -21,7 +21,7 @@ class MemeCollectionViewController: UICollectionViewController, UICollectionView
         
         let space: CGFloat = 0.1
         
-        let dimension = (self.view.frame.size.width - (4 * space))  / 4.0
+        let dimension = (view.frame.size.width - (4 * space))  / 4.0
         
         flowLayout.minimumInteritemSpacing = space
         flowLayout.minimumLineSpacing = space
@@ -36,11 +36,11 @@ class MemeCollectionViewController: UICollectionViewController, UICollectionView
         let appDelegate = object as! AppDelegate
         memes = appDelegate.memes
         
-        self.collectionView?.reloadData()
+        collectionView?.reloadData()
     }
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.memes.count
+        return memes.count
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -67,16 +67,16 @@ class MemeCollectionViewController: UICollectionViewController, UICollectionView
     
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let detailController = self.storyboard!.instantiateViewControllerWithIdentifier("MemeDetailViewController") as! MemeDetailViewController
+        let detailController = storyboard!.instantiateViewControllerWithIdentifier("MemeDetailViewController") as! MemeDetailViewController
         detailController.meme = memes[indexPath.row]
         detailController.memeIndex = indexPath.row
         
-        self.navigationController!.pushViewController(detailController, animated: true)
+        navigationController!.pushViewController(detailController, animated: true)
     }
     
     @IBAction func addMeme(sender: AnyObject) {
-        let addMemeViewController = self.storyboard?.instantiateViewControllerWithIdentifier("EditMeme") as! EditMemeViewController
-        self.presentViewController(addMemeViewController, animated: true, completion: nil)
+        let addMemeViewController = storyboard?.instantiateViewControllerWithIdentifier("EditMeme") as! EditMemeViewController
+        presentViewController(addMemeViewController, animated: true, completion: nil)
     }
     
 }
